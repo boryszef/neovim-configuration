@@ -12,7 +12,7 @@ vim.lsp.config('ruff', {
 
   on_attach = function(client, bufnr)
 
-    -- format code: "<Space>rf"
+    -- format code: "<Space>f"
     vim.keymap.set("n", "<leader>f", function()
       vim.lsp.buf.format({ async = true })
     end, { buffer = bufnr })
@@ -48,14 +48,6 @@ vim.api.nvim_create_autocmd("VimEnter", {
   end,
 })
 
--- Statusline
-require("lualine").setup {
-  options = {
-    theme = "dracula", section_separators = '', component_separators = ''
-  }
-}
-
-require("bufferline").setup{}
 
 -- Tabline: Next buffer
 vim.keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
@@ -76,27 +68,18 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
 )
 
 
--- File explorer
---require("nvim-tree").setup()
---vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
+local rt = require("rust-tools")
 
--- Bufferline
---require("bufferline").setup{}
---vim.keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
---vim.keymap.set("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
-
---local rt = require("rust-tools")
-
---rt.setup({
---  server = {
---    on_attach = function(_, bufnr)
+rt.setup({
+  server = {
+    on_attach = function(_, bufnr)
       -- Hover actions
---      vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+      vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
       -- Code action groups
---      vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
---    end,
---  },
---})
+      vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+    end,
+  },
+})
 
 -- Completion Plugin Setup
 --local cmp = require'cmp'
@@ -122,5 +105,4 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
 --      select = true,
 --    })
 --  },
-  -- Installed sources:
 --})
