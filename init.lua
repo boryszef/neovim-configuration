@@ -67,19 +67,8 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
   vim.lsp.handlers.signature_help, { border = "rounded" }
 )
 
-
-local rt = require("rust-tools")
-
-rt.setup({
-  server = {
-    on_attach = function(_, bufnr)
-      -- Hover actions
-      vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
-      -- Code action groups
-      vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
-    end,
-  },
-})
+-- Use darker background for floats (compared to Dracula)
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#1a1c24" })
 
 -- Completion Plugin Setup
 --local cmp = require'cmp'
