@@ -60,7 +60,7 @@ vim.keymap.set("n", "<leader>d", vim.lsp.buf.definition, {})
 vim.keymap.set("n", "<leader>r", vim.lsp.buf.references, {})
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-  vim.lsp.handlers.hover, { border = "rounded", width = 70, height = 15 }
+  vim.lsp.handlers.hover, { border = "rounded" }
 )
 
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
@@ -69,6 +69,12 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
 
 -- Use darker background for floats (compared to Dracula)
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#1a1c24" })
+
+-- Remap :q, so that it closes the buffer, making tabs disappear
+vim.api.nvim_create_user_command("Q", function()
+  require("mini.bufremove").delete(0, false)
+end, {})
+
 
 -- Completion Plugin Setup
 --local cmp = require'cmp'
