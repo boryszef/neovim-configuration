@@ -75,6 +75,14 @@ vim.api.nvim_create_user_command("Q", function()
   require("mini.bufremove").delete(0, false)
 end, {})
 
+-- Map Esc in terminal mode to go back to normal mode
+vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { noremap = true })
+
+-- Shorthand :b to open a terminal running bash
+vim.api.nvim_create_user_command("B", function()
+  vim.cmd("edit term://bash")
+end, {})
+
 
 -- Completion Plugin Setup
 --local cmp = require'cmp'
