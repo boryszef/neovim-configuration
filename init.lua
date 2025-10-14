@@ -55,6 +55,12 @@ vim.keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>", { noremap = true, silen
 -- Tabline: Previous buffer
 vim.keymap.set("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
 
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
+vim.fn.sign_define("DiagnosticSignError", { text = "❌", texthl = "DiagnosticSignError" })
+vim.fn.sign_define("DiagnosticSignWarn", { text = "⚠️", texthl = "DiagnosticSignWarn" })
+vim.fn.sign_define("DiagnosticSignHint", { text = "💡", texthl = "DiagnosticSignHint" })
+vim.fn.sign_define("DiagnosticSignInfo", { text = "ℹ️", texthl = "DiagnosticSignInfo" })
+
 vim.keymap.set("n", "<leader>?", vim.lsp.buf.hover, {})
 vim.keymap.set("n", "<leader>d", vim.lsp.buf.definition, {})
 vim.keymap.set("n", "<leader>r", vim.lsp.buf.references, {})
@@ -82,6 +88,17 @@ vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { noremap = true })
 vim.api.nvim_create_user_command("B", function()
   vim.cmd("edit term://bash")
 end, {})
+
+-- Run IPython shell
+vim.api.nvim_create_user_command("S", function()
+  vim.cmd("edit term://ipython")
+end, {})
+
+-- Global / window options for folding
+vim.opt.foldmethod = "indent"
+vim.opt.foldenable = true
+vim.opt.foldlevel = 0
+vim.opt.foldminlines = 2
 
 
 -- Completion Plugin Setup
