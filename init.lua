@@ -100,29 +100,29 @@ vim.opt.foldenable = true
 vim.opt.foldlevel = 0
 vim.opt.foldminlines = 2
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "python",
+  callback = function()
+    vim.bo.tabstop = 4        -- number of spaces a <Tab> counts for
+    vim.bo.shiftwidth = 4     -- size of autoindent
+    vim.bo.expandtab = true   -- use spaces instead of tabs
+    vim.bo.softtabstop = 4    -- spaces inserted when pressing <Tab>
+  end,
+})
 
--- Completion Plugin Setup
---local cmp = require'cmp'
---cmp.setup({
-  -- Enable LSP snippets
---  snippet = {
---    expand = function(args)
---        vim.fn["vsnip#anonymous"](args.body)
---    end,
---  },
---  mapping = {
---    ['<C-p>'] = cmp.mapping.select_prev_item(),
---    ['<C-n>'] = cmp.mapping.select_next_item(),
-    -- Add tab support
---    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
---    ['<Tab>'] = cmp.mapping.select_next_item(),
---    ['<C-S-f>'] = cmp.mapping.scroll_docs(-4),
---    ['<C-f>'] = cmp.mapping.scroll_docs(4),
---    ['<C-Space>'] = cmp.mapping.complete(),
---    ['<C-e>'] = cmp.mapping.close(),
---    ['<CR>'] = cmp.mapping.confirm({
---      behavior = cmp.ConfirmBehavior.Insert,
---      select = true,
---    })
---  },
---})
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "lua", "css", "html", "javascript", "typescript", "json", "yaml" },
+  callback = function()
+    vim.bo.tabstop = 2
+    vim.bo.shiftwidth = 2
+    vim.bo.expandtab = true
+    vim.bo.softtabstop = 2
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "csv",
+  callback = function()
+    require("csvview").enable()
+  end,
+})

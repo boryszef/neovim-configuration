@@ -18,8 +18,8 @@ return {
         },
         mapping = {
 	  -- Ctrl-v and Ctrl-c becuase it's easy to reach for my left hand
-          ["<C-v>"] = cmp.mapping.select_next_item(),
-          ["<C-c>"] = cmp.mapping.select_prev_item(),
+          ["<Down>"] = cmp.mapping.select_next_item(),
+          ["<Up>"] = cmp.mapping.select_prev_item(),
           ["<CR>"]  = cmp.mapping.confirm({ select = true }),
           ["<C-Space>"] = cmp.mapping.complete(),
         },

@@ -8,6 +8,9 @@ return {
         update_cwd = true,         -- update the tree root to match cwd
         sync_root_with_cwd = true, -- keep tree in sync with working dir
         respect_buf_cwd = true,    -- open tree in buffer's cwd
+	view = {
+	  adaptive_size = true,
+        }
       })
     end
   },
