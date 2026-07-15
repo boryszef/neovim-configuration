@@ -1,15 +1,32 @@
 return {
   {
-    "iamcco/markdown-preview.nvim",
+    "MeanderingProgrammer/render-markdown.nvim",
     ft = { "markdown" },
-    build = "cd app && npm install",
     config = function()
-      -- don't auto start preview
-      vim.g.mkdp_auto_start = 0
-      -- open in browser by default (set to 0 to use internal)
-      -- vim.g.mkdp_open_to_the_world = 0
-      -- map <leader>m to toggle preview
-      vim.keymap.set("n", "<leader>m", ":MarkdownPreviewToggle<CR>", { noremap = true, silent = true })
+      require("render-markdown").setup({
+        file_types = { "markdown" },
+        render = {
+          margin = 2,
+          padding = { top = 1, bottom = 1 },
+        },
+        heading = {
+          sign = true,
+          icons = { "# ", "## ", "### ", "#### ", "##### ", "###### " },
+        },
+        code = {
+          sign = true,
+          style = "full",
+          left_pad = 1,
+          right_pad = 1,
+        },
+        bullet = {
+          highlight = "@markup.list.markdown",
+          icons = { "●", "○", "◆", "◇" },
+        },
+      })
+      -- map <leader>m to toggle render-markdown
+      vim.keymap.set("n", "<leader>m", ":RenderMarkdown toggle<CR>", { noremap = true, silent = true })
     end,
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
   },
 }
